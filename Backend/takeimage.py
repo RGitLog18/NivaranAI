@@ -33,6 +33,12 @@ import onboarding
 import hashlib
 from email.mime.text import MIMEText
 
+import nltk
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+    
 # Load environment variables
 load_dotenv()
 
