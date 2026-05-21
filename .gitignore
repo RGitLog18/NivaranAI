@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env[[1](https://www.google.com/url?sa=E&q=https%3A%2F%2Fvertexaisearch.cloud.google.com%2Fgrounding-api-redirect%2FAUZIYQGUSdXo02UjpquuQEW-v77L6uDacvwvX6vM_wcNJpO11pl_aonbSloj7eSp55OIFsNXxoRyKID4vP0w7ILdeqILYw4oktAF0ygaydsgbIoAq0RZnpDrwgFW7qCf6oGDb7yqRo_qODc0LTy3FHrZxWmDumhMHYz-XJDt3AZWVNhPoPpG-3prkS3RiR5-igbWb7n4jmYFYJbgxAroSu6sC7CG91FnLIIOpcc%3D)]
+
+# SQLite Database (If it contains dynamic data)
+*.sqlite3
+*.db
+
+# Local Uploads
+/backend/uploads/
+
+# Production builds
+/frontend/dist/
+/frontend/build/
