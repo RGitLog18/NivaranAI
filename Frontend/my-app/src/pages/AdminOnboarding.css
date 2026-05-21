@@ -1,0 +1,379 @@
+/* ============================================================
+   DIGITAL SUNLIGHT THEME — AdminOnboarding.css
+   Background: #FFFFFF | Cards: #F0F9FF | Buttons: #10B981
+   SOVEREIGN STANDARD: NO BLACK / NO DARK THEMES
+   ============================================================ */
+
+/* --- PAGE SHELL --- */
+.auth-page.digital-sunlight {
+  min-height: 100vh;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 2rem 1rem;
+}
+
+/* --- CARD --- */
+.auth-card-wide {
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 8px 40px rgba(16, 185, 129, 0.08);
+}
+
+/* --- HEADER --- */
+.auth-emblem {
+  font-size: 2.5rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #0F172A;
+  text-align: center;
+  margin: 0 0 0.25rem;
+}
+
+.auth-header p,
+.step-label {
+  color: #64748B;
+  text-align: center;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0;
+}
+
+/* --- STEPPER DOTS --- */
+.stepper-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 1rem 0 0.5rem;
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.step-dot.active {
+  background: #10B981;
+  transform: scale(1.3);
+}
+
+/* --- STAGE CONTENT AREA --- */
+.stage-content {
+  margin-top: 1.5rem;
+}
+
+/* --- FORM FIELDS --- */
+.auth-field {
+  margin-bottom: 1.25rem;
+}
+
+.auth-field label,
+.field-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.3px;
+}
+
+.auth-field input,
+.auth-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #BAE6FD;
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: #0F172A;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.auth-field input:focus {
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.input-locked {
+  background: #F8FAFC !important;
+  color: #64748B !important;
+  cursor: not-allowed;
+}
+
+/* --- PRIMARY BUTTON --- */
+.btn-auth {
+  width: 100%;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 12px;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-auth:hover:not(:disabled) {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-auth:disabled {
+  background: #6EE7B7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.bg-emerald {
+  background: #10B981;
+}
+
+/* --- PULSING ANIMATION (Anchoring state) --- */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.65; }
+}
+
+/* --- GOV POST GRID (Body / Role selector) --- */
+.gov-post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.post-btn {
+  padding: 0.75rem 0.5rem;
+  border: 2px solid #BAE6FD;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #374151;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.post-btn:hover {
+  border-color: #10B981;
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.post-btn.active {
+  border-color: #10B981;
+  background: #10B981;
+  color: #FFFFFF;
+}
+
+/* --- UPLOAD BOX --- */
+.upload-box-sovereign {
+  border: 2px dashed #BAE6FD;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  background: #F8FAFC;
+  color: #64748B;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+.upload-box-sovereign:hover {
+  border-color: #10B981;
+  background: #ECFDF5;
+}
+
+/* --- PULSING BADGE (GPS verified) --- */
+.pulsing-badge-sovereign {
+  display: inline-block;
+  background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+  border: 1.5px solid #10B981;
+  color: #065F46;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  animation: badge-pulse 2s infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+}
+
+/* --- WORKSPACE SHIELD --- */
+.workspace-shield {
+  text-align: center;
+}
+
+.workspace-shield h3 {
+  color: #0F172A;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.workspace-shield p {
+  color: #64748B;
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+/* --- GEO LOCK WRAP --- */
+.geo-lock-wrap {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.geo-lock-wrap h3 {
+  color: #0F172A;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.geo-lock-wrap p {
+  color: #64748B;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+}
+
+.big-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* --- ERROR & SUCCESS ALERTS --- */
+.auth-error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #B91C1C;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  animation: shake 0.3s ease;
+}
+
+.auth-success {
+  background: #ECFDF5;
+  border: 1px solid #6EE7B7;
+  color: #065F46;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* --- FOOTER --- */
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.auth-footer a {
+  color: #10B981;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* --- THEME TOGGLE --- */
+.auth-theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.auth-theme-toggle:hover {
+  background: #ECFDF5;
+}
+
+/* --- TEXT HELPERS --- */
+.text-muted {
+  color: #64748B;
+  font-size: 0.88rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.animate-pop {
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- OTP INPUT --- */
+.otp-input-large {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  font-size: 1.8rem;
+  letter-spacing: 0.8rem;
+  text-align: center;
+  border: 2px solid #BAE6FD;
+  border-radius: 12px;
+  background: #FFFFFF;
+  color: #0F172A;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.otp-input-large:focus {
+  border-color: #10B981;
+}

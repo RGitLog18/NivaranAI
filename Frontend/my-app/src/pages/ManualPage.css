@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+/* High-Impact Visual Bloom pulse for the heatmap/pipeline */
+.visual-bloom-pulse {
+  animation: bloom 1.5s infinite ease-in-out;
+}
+
+@keyframes bloom {
+  0% { filter: drop-shadow(0 0 0px #10b981); }
+  50% { filter: drop-shadow(0 0 15px #10b981); }
+  100% { filter: drop-shadow(0 0 0px #10b981); }
+}
+
+/* Glassmorphism Sidebar fallback */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Fix for the Hero AI Core scanner */
+.ai-scanner-orb {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-line-animation::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(16, 185, 129, 0.2), transparent);
+}

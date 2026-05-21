@@ -1,0 +1,217 @@
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.85); }
+  60% { opacity: 1; transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.role-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.role-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: var(--bg-nav);
+  color: var(--text-nav);
+  animation: fadeInDown 0.4s ease-out;
+}
+
+.role-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.role-nav-brand:hover { transform: scale(1.03); }
+
+.role-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.role-heading {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  color: var(--text-heading);
+  animation: fadeInUp 0.5s ease-out 0.1s both;
+}
+
+.role-subtext {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 0 0 3rem;
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+.role-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.role-option {
+  background: var(--bg-card);
+  border: 2px solid var(--border-card);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, border-color 0.3s;
+  animation: bounceIn 0.5s ease-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-option::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: linear-gradient(135deg, hsla(168, 55%, 38%, 0.03), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.role-option:hover::after { opacity: 1; }
+
+.role-option:first-child { animation-delay: 0.15s; }
+.role-option:last-child { animation-delay: 0.25s; }
+
+.role-option:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 45px hsla(168, 40%, 25%, 0.14);
+}
+
+.citizen-option { border-top: 4px solid var(--accent-teal); }
+.gov-option { border-top: 4px solid var(--accent-yellow); }
+
+.role-option-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+}
+
+.role-option:hover .role-option-icon { transform: scale(1.15) rotate(-5deg); }
+
+.role-option h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+
+.role-option p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.role-option ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+}
+
+.role-option li {
+  padding: 0.3rem 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: transform 0.2s;
+}
+
+.role-option:hover li { transform: translateX(4px); }
+
+.role-option li::before {
+  content: '✓ ';
+  color: var(--accent-teal);
+  font-weight: 700;
+}
+
+.role-option-cred {
+  background: var(--accent-teal-light);
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-bottom: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.role-option-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.role-option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px hsla(168, 40%, 25%, 0.2);
+}
+
+.citizen-btn { background: var(--accent-teal); color: hsl(0, 0%, 100%); }
+.gov-btn { background: hsl(220, 45%, 22%); color: hsl(0, 0%, 100%); }
+
+.role-btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.citizen-btn-outline,
+.gov-btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent-teal);
+  color: var(--accent-teal);
+}
+
+.citizen-btn-outline:hover,
+.gov-btn-outline:hover {
+  background: var(--accent-teal-light);
+}
+
+.role-back {
+  margin-top: 2.5rem;
+  animation: fadeInUp 0.5s ease-out 0.4s both;
+}
+
+.role-back a {
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.role-back a:hover { color: var(--accent-teal); }
+
+@media (max-width: 640px) {
+  .role-cards { grid-template-columns: 1fr; }
+  .role-container { padding: 2.5rem 1.25rem; }
+}

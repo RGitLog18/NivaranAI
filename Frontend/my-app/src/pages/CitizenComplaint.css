@@ -1,0 +1,396 @@
+/* NIVARAN SOVEREIGN THEME - MODERN FORM AESTHETIC */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-emerald: #10b981;
+  --dark-emerald: #065f46;
+  --light-emerald: #ecfdf5;
+  --navy-slate: #1e293b;
+  --text-main: #334155;
+  --text-muted: #64748b;
+  --bg-offwhite: #f8fafc;
+  --glass-white: rgba(255, 255, 255, 0.9);
+  --soft-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --smooth-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.citizen-page {
+  background-color: var(--bg-offwhite);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  padding-bottom: 80px;
+  animation: pageEntry 0.8s ease-out;
+}
+
+@keyframes pageEntry {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- HEADER SECTION --- */
+.citizen-header {
+  background: linear-gradient(135deg, var(--navy-slate) 0%, #0f172a 100%);
+  padding: 60px 20px 100px;
+  text-align: center;
+  color: white;
+  border-bottom: 4px solid var(--primary-emerald);
+}
+
+.header-emblem {
+  background: white;
+  color: var(--primary-emerald);
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 32px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: var(--smooth-transition);
+}
+
+.citizen-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px;
+}
+
+.citizen-header p {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--primary-emerald);
+  opacity: 0.9;
+}
+
+/* --- FORM WRAPPER --- */
+.complaint-form {
+  max-width: 760px;
+  margin: -50px auto 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- SECTION CARDS --- */
+.form-section {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--soft-shadow);
+  border: 1px solid #f1f5f9;
+  transition: var(--smooth-transition);
+}
+
+.form-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+}
+
+.form-section h3 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--navy-slate);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Step Numbers Style */
+.form-section h3::before {
+  content: "";
+  /* If you want to use the step-number logic from layout */
+  display: inline-block;
+}
+
+/* --- INPUTS & LABELS --- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f8fafc;
+  /* Soft off-white */
+  border: 2px solid #f1f5f9;
+  /* Subtle border */
+  border-radius: 16px;
+  /* Modern rounded corners */
+  padding: 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #1e293b;
+  line-height: 1.6;
+  resize: vertical;
+  /* Allows user to expand if needed */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-emerald);
+  background-color: white;
+  outline: none;
+  box-shadow: 0 0 0 4px var(--light-emerald);
+}
+
+.form-section textarea::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* --- LOCATION TOGGLE (Segmented Control) --- */
+.location-mode-toggle {
+  display: flex;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+}
+
+.location-mode-toggle button {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted);
+  background: transparent;
+  transition: var(--smooth-transition);
+}
+
+.location-mode-toggle button.active {
+  background: white;
+  color: var(--primary-emerald);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* --- MAP CONTAINER --- */
+.map-picker-container {
+  border: 2px solid #f1f5f9;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  animation: slideFade 0.5s ease-out;
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- UPLOAD AREA --- */
+.upload-area {
+  border: 2px dashed #e2e8f0;
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 48px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--smooth-transition);
+}
+
+.upload-area:hover {
+  border-color: var(--primary-emerald);
+  background: var(--light-emerald);
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- BUTTONS --- */
+.btn-primary {
+  background-color: var(--primary-emerald);
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 14px;
+  border: none;
+  transition: var(--smooth-transition);
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 20px;
+  font-size: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+  margin-top: 10px;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background-color: var(--dark-emerald);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+}
+
+.btn-submit:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- SUCCESS CARD --- */
+.success-card {
+  background: white;
+  padding: 60px;
+  border-radius: 32px;
+  text-align: center;
+  max-width: 500px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-emerald);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 30px;
+}
+
+/* --- UTILS --- */
+.input-readonly {
+  background-color: #f1f5f9 !important;
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.otp-input-large {
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5em;
+  font-weight: 800;
+  color: var(--dark-emerald);
+}
+
+.btn-action {
+  background: var(--navy-slate);
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.7rem;
+  border-radius: 8px;
+}
+
+.verification-badge {
+  background: var(--light-emerald);
+  color: var(--dark-emerald);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: inline-block;
+}
+
+.animate-pop {
+  animation: slideFade 0.4s ease-out;
+}
+
+/* --- MAP SEARCH BAR --- */
+.map-search-input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.map-search-input-group input {
+  flex: 1;
+  background: white !important;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.btn-map-search {
+  background: var(--navy-slate);
+  color: white;
+  border: none;
+  width: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--smooth-transition);
+}
+
+.btn-map-search:hover {
+  background: var(--primary-emerald);
+  transform: scale(1.05);
+}
+
+/* Ensure the map container looks premium */
+.map-picker-container {
+  border: 2px solid #f1f5f9;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
