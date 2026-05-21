@@ -11,7 +11,7 @@ export default function DigiLockerCallback() {
     
     if (code && state === localStorage.getItem('dg_state')) {
       // 1. Validate the code with your Python Backend
-      fetch('http://localhost:8002/api/verify-token', {
+      fetch(`http://${import.meta.env.VITE_API_URL}:8002/api/verify-token`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })

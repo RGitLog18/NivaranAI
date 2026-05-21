@@ -44,7 +44,7 @@ export default function CitizenSignup() {
     }
     setSubmitting(true); setError('');
     try {
-      const response = await fetch('http://localhost:8000/api/citizen/send-otp', {
+      const response = await fetch('http://:8000/api/citizen/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -65,7 +65,7 @@ export default function CitizenSignup() {
     e.preventDefault();
     setSubmitting(true); setError('');
     try {
-      const verifyRes = await fetch('http://localhost:8000/api/citizen/verify-otp', {
+      const verifyRes = await fetch(`${import.meta.env.VITE_API_URL}:8000/api/citizen/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: form.email.trim(), code: otp.trim() }),
@@ -82,7 +82,7 @@ export default function CitizenSignup() {
     if (form.password !== form.confirmPassword) return setError('Passwords mismatch');
     setSubmitting(true);
     try {
-      const dbResponse = await fetch('http://localhost:8000/api/citizen/register', {
+      const dbResponse = await fetch(`${import.meta.env.VITE_API_URL}:8000/api/citizen/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -126,12 +126,7 @@ export function ComplaintProvider({ children }) {
       if (userSnap.exists()) {
         const userData = userSnap.data();
         console.log(`Ready to notify ${userData.name} at ${userData.email}`);
-
-        // TRIGGER NOTIFICATION: Call your FastAPI endpoint here
-        // await fetch('http://localhost:8000/send-notification', {
-        //   method: 'POST',
-        //   body: JSON.stringify({ email: userData.email, status: newStatus })
-        // });
+        
       }
 
       await fetchComplaints();

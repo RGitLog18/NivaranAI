@@ -59,8 +59,7 @@ export default function AdminOnboarding() {
         : '';
       if (!currentEmail) {setStep(1); return;}
       try {
-        const res = await axios.get(`http://localhost:8000/api/onboarding/status?email=${currentEmail}`, getAuthHeaders());
-        // const res = await axios.get(`http://localhost:8000/api/onboarding/status?email=${email}`, getAuthHeaders());
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}:8000/api/onboarding/status?email=${currentEmail}`, getAuthHeaders());
         if (res.data && res.data.step > 1) {
           setForm(prev => ({
             ...prev,
@@ -103,7 +102,7 @@ export default function AdminOnboarding() {
         fd.append('field', field);
         fd.append('value', value);
       }
-      await axios.patch('http://localhost:8000/api/onboarding/update-step', fd, getAuthHeaders());
+      await axios.patch(`${import.meta.env.VITE_API_URL}:8000/api/onboarding/update-step`, fd, getAuthHeaders());
       toast.success(`Stage ${targetStep} Synchronized`, { style: { background: '#10B981', color: '#fff', border: 'none' } });
       setStep(targetStep);
     } catch (err) {
@@ -144,7 +143,7 @@ export default function AdminOnboarding() {
     setIsValidatingCode(true);
     setAdminDetails(null);
     try {
-      const res = await axios.get(`http://localhost:8000/api/onboarding/check-code?code=${form.workspaceCode}&location=${form.location}`, getAuthHeaders());
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}:8000/api/onboarding/check-code?code=${form.workspaceCode}&location=${form.location}`, getAuthHeaders());
       toast.success(res.data.message || "Workspace Validated!");
       setAdminDetails(res.data);
       // Brief pause to show the Emerald Green pulsing animation
@@ -193,7 +192,7 @@ export default function AdminOnboarding() {
       fd.append('desks', 5);
       fd.append('workers', 20);
 
-      const res = await axios.post('http://localhost:8000/api/v1/system/configure', fd, {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}:8000/api/v1/system/configure`, fd, {
         headers: { 
           Authorization: "Bearer " + token,
           'Content-Type': 'multipart/form-data'

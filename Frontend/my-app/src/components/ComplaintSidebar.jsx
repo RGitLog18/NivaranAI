@@ -25,7 +25,7 @@ export function ComplaintSidebar() {
             lng: selectedComplaint.longitude,
             category: selectedComplaint.ai_category
           });
-          const res = await fetch(`http://localhost:8000/api/complaint-count?${params}`);
+          const res = await fetch(`${import.meta.env.VITE_API_URL}/api/complaint-count?${params}`);
           const data = await res.json();
           setCitizenCount(data.count);
         } catch (e) {
@@ -51,7 +51,7 @@ export function ComplaintSidebar() {
     const userRole = user?.admin_role || user?.role || 'Desk Officer';
 
     try {
-      const response = await fetch('http://localhost:8000/api/update-complaint-status', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/update-complaint-status`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -139,7 +139,7 @@ export function ComplaintSidebar() {
             <CardHeader><CardTitle className="text-sm">Evidence</CardTitle></CardHeader>
             <CardContent>
               <img
-                src={`http://localhost:8000/${selectedComplaint.image_path}`}
+                src={`${import.meta.env.VITE_API_URL}:8000/${selectedComplaint.image_path}`}
                 alt="Complaint"
                 className="w-full h-48 object-cover rounded-lg"
                 onError={(e) => e.target.src = 'https://via.placeholder.com/400x200?text=No+Image+Available'}

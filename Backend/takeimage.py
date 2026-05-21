@@ -15,6 +15,9 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary.uploader
+from cloudinary.utils import cloudinary_url
 
 from detective import run_ai_detection  # AI Verification (Roboflow)
 from priortize import prioritize_complaint  # Categorization & Logic
@@ -38,7 +41,7 @@ app = FastAPI(title="Nivaran Backend - Enterprise Verified AI Pipeline")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5173", 
+        f"http://{import.meta.env.VITE_API_URL}:5173", 
         "http://127.0.0.1:5173",
         "http://localhost:3000"
     ],
@@ -66,6 +69,14 @@ sessions = {} # {token: {"name": str, "role": str}}
 #     allow_methods=["*"],
 #     allow_headers=["*"],
 # )
+
+# Cloudinary Configuration
+cloudinary.config( 
+  cloud_name = os.getenv("CLOUDINARY_CLOUD_NAME"), 
+  api_key = os.getenv("CLOUDINARY_API_KEY"), 
+  api_secret = os.getenv("CLOUDINARY_API_SECRET"),
+  secure = True
+)
 
 # --- 2. SECURITY CONFIGURATION ---
 DATABASE_PATH = os.getenv("DATABASE_PATH", "grievance.db")   # Complaints & core data
@@ -514,17 +525,33 @@ async def submit_complaint(
             raise HTTPException(status_code=403, detail="Identity not verified. Please verify OTP.")
 
     try:
-        # STEP 1: SAVE IMAGE (Maintain performance with await file.read())
-        os.makedirs("uploads", exist_ok=True)
-        file_loc = f"uploads/{file.filename}"
-        content = await file.read()
-        with open(file_loc, "wb+") as file_obj:
-            file_obj.write(content)
+         # --- NEW CLOUDINARY UPLOAD LOGIC ---
+        # Read the file bytes
+        file_content = await file.read()
         
-        # STEP 2: CREATE PENDING RECORD (Immediate Handshake)
+        # Upload to Cloudinary directly from memory
+        upload_result = cloudinary.uploader.upload(
+            file_content,
+            folder="nivaran_complaints"
+        )
+        
+        # Get the Secure URL (https)
+        image_url = upload_result.get("secure_url")
+        ai_result = run_ai_detection(image_url)
+
+        if not ai_result['detected'] or ai_result['confidence'] < 0.5:
+            # OPTIONAL: Delete from Cloudinary if AI rejects it to save space
+            # public_id = upload_result['public_id']
+            # cloudinary.uploader.destroy(public_id)
+            
+            raise HTTPException(
+                status_code=400, 
+                detail=f"AI REJECTED: Image is not a valid grievance ({ai_result['label']})."
+            )
+
+        # --- DATABASE LOGIC ---
         encrypted_name = encrypt_data(full_name)
         encrypted_phone = encrypt_data(phone)
-        # encrypted_email = encrypt_data(email)
 
         conn = sqlite3.connect(DATABASE_PATH)
         cursor = conn.cursor()
@@ -535,39 +562,25 @@ async def submit_complaint(
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
             (
                 encrypted_name, encrypted_phone, email, language,
-                description, location, latitude, longitude, ward_zone, file_loc, 'pending'
+                description, location, latitude, longitude, ward_zone, 
+                image_url, # <--- Save the Cloudinary URL here instead of local path
+                'verified'
             )
         )
         complaint_id = cursor.lastrowid
         conn.commit()
         conn.close()
         
-        # --- YOLOv11 + NLP MULTIMODAL GUARD (FIRE-AND-FORGET) ---
-        # background_tasks.add_task(
-        #     run_task_back,
-        #     complaint_id, file_loc, description, location, latitude, longitude
-        # )
-
-        # NEW: Run a quick AI pre-check synchronously
-        ai_result = run_ai_detection(file_loc)
+        # Trigger background AI task using the URL or the content
+        background_tasks.add_task(run_ai_pipeline, complaint_id, image_url, description, latitude, longitude, location)
         
-        if not ai_result['detected'] or ai_result['confidence'] < 0.5:
-            os.remove(file_loc) # Delete the bad image
-            raise HTTPException(
-            status_code=400, 
-            detail=f"AI REJECTED: Image does not appear to be a valid grievance ({ai_result['label']})."
-        )
-        background_tasks.add_task(run_ai_pipeline, complaint_id, file_loc, description, latitude, longitude, location)
-        
-        # Cleanup verification context after successful submission
-        # del auth_context[email_clean]
-        
-        # STEP 4: SUCCESS RESPONSE (Immediate feedback to citizen)
         return {
             "status": "success",
             "id": complaint_id,
-            "message": "Verified! Complaint received. AI Triaging is starting in the background."
+            "image_url": image_url,
+            "message": "Verified! Complaint received and image stored in cloud."
         }
+
     except Exception as e:
         print(f"Server Error: {e}")
         return {"status": "error", "message": str(e)}
