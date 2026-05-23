@@ -36,9 +36,9 @@ def send_email(target, subject, body):
     
     try:
         # SYSTEMS ARCHITECT: Switching to Port 465 (Implicit SSL) to bypass STARTTLS read timeouts
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=30)
+        server = smtplib.SMTP_SSL('smtp.gmail.com', 587, timeout=30)
         # server.set_debuglevel(1) # Enable only for low-level protocol debugging
-        
+        server.starttls()
         server.login(SMTP_EMAIL, SMTP_PASSWORD)
         server.send_message(msg)
         server.quit()

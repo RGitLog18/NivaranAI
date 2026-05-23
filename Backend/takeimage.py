@@ -7,6 +7,7 @@ import sqlite3
 import uvicorn
 import time
 import smtplib
+from fastapi import BackgroundTasks
 import os
 import random
 from datetime import datetime, timedelta
@@ -343,7 +344,7 @@ init_db()
 # --- AUTH APIS (Signup & Login) ---
 
 @app.post("/api/citizen/send-otp")
-async def citizen_send_otp(data: OTPRequest):
+async def citizen_send_otp(data: OTPRequest, background_tasks: BackgroundTasks):
     print(f">>> RECEIVED REQUEST FOR EMAIL: {data.email}", flush=True)
 
     email = data.email.strip().lower()
@@ -384,7 +385,9 @@ async def citizen_send_otp(data: OTPRequest):
     }
 
     print(f"👤 CITIZEN OTP for {email}: {otp_code}", flush=True)
+    background_tasks.add_task(send_email_task, email, "Verification Code", f"Your code is: {otp_code}")
     print(">>> SKIPPING EMAIL FOR DEBUGGING...", flush=True)
+    
     # send_email(email, "Citizen Portal Verification", f"Your Nivaran verification code is: {otp_code}")
     
     return {"status": "success", "message": "OTP sent successfully."}

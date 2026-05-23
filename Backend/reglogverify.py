@@ -9,6 +9,7 @@ from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import jwt
+from fastapi import BackgroundTasks
 import os
 from dotenv import load_dotenv
 
@@ -231,7 +232,7 @@ async def request_otp(email: str = Form(...), name: str = Form(...)):
     return {"status": "success", "message": "OTP Dispatched"}
 
 @router.post("/api/gov/send-otp")
-async def send_otp(data: OTPRequest):
+async def send_otp(data: OTPRequest, background_tasks: BackgroundTasks):
     email = data.email.strip().lower()
     is_signup = data.is_signup
 
@@ -265,7 +266,7 @@ async def send_otp(data: OTPRequest):
     }
 
     print(f"🏛️ GOV OTP for {email}: {otp_code}")
-    send_email(email, "Gov Portal Verification", f"Your Nivaran official code is: {otp_code}")
+    background_tasks.add_task(send_email_task, email, "Gov Portal Verification", f"Your Nivaran official code is: {otp_code}")
     
     return {"status": "success", "message": "OTP dispatched to official email."}
 
