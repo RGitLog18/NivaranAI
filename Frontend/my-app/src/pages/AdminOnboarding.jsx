@@ -209,8 +209,7 @@ export default function AdminOnboarding() {
           admin_role: res.data.admin_role, // Get technical role (Admin/Contractor/etc)
           is_setup_complete: 1,
           is_onboarded: true,
-          specific_role: form.specificRole,
-          is_setup_complete: 1
+          specific_role: form.specificRole
         }, token);
 
         navigate('/dashboard');
