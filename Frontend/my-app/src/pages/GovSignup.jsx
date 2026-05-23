@@ -37,7 +37,7 @@ export default function GovSignup() {
   const checkResumption = async () => {
     if (!form.email.includes('@')) return;
     try {
-      const res = await axios.get(`http://${import.meta.env.VITE_API_URL}/api/onboarding/status?email=${form.email.trim()}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/onboarding/status?email=${form.email.trim()}`);
 
       // 1. If user is fully complete, go to login
       if (res.data.is_setup_complete) {
@@ -63,7 +63,7 @@ export default function GovSignup() {
     setSubmitting(true);
     setError('');
     try {
-      await axios.post(`http://${import.meta.env.VITE_API_URL}/api/gov/send-otp`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/gov/send-otp`, {
         email: form.email.trim(), name: form.name.trim(), role: 'government', is_signup: true
       });
 
@@ -72,7 +72,7 @@ export default function GovSignup() {
       fd.append('step', 1);
       fd.append('field', 'name');
       fd.append('value', form.name.trim());
-      await axios.patch(`http://${import.meta.env.VITE_API_URL}/api/onboarding/update-step`, fd);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/onboarding/update-step`, fd);
 
       setOtpSent(true);
       setOtpTimer(60);
@@ -93,7 +93,7 @@ export default function GovSignup() {
     setSubmitting(true);
     setError('');
     try {
-      const response = await axios.post(`http://${import.meta.env.VITE_API_URL}/api/gov/verify-otp`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/gov/verify-otp`, {
         email: form.email.trim(), code: otp.trim()
       });
 
@@ -106,7 +106,7 @@ export default function GovSignup() {
       fd.append('step', 1);
       fd.append('field', 'name');
       fd.append('value', form.name.trim());
-      await axios.patch(`http://${import.meta.env.VITE_API_URL}/api/onboarding/update-step`, fd);
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/onboarding/update-step`, fd);
 
       toast.success("Identity Verified. Initiating administrative moulding...");
       setTimeout(() => navigate('/admin-onboarding'), 1000);

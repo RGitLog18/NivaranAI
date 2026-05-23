@@ -40,7 +40,7 @@ export default function LoginPage({ defaultRole }) {
     setSubmitting(true);
     setError('');
     try {
-      await axios.post(`http://${import.meta.env.VITE_API_URL}/api/gov/send-otp`, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/gov/send-otp`, {
         email: email.trim(),
         name: name.trim(),
         role: defaultRole,
@@ -60,7 +60,7 @@ export default function LoginPage({ defaultRole }) {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await axios.post(`http://${import.meta.env.VITE_API_URL}/api/gov/verify-otp`, { email, code: otp });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/gov/verify-otp`, { email, code: otp });
       if (res.data.status === 'success') {
        
         const userData = res.data.user; 

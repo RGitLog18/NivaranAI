@@ -186,7 +186,7 @@ export default function ContractorPortal() {
                 <div className="photo-box">
                   <span className="photo-tag">BEFORE</span>
                   {selectedMission.image_path ? (
-                     <img src={`http://${import.meta.env.VITE_API_URL}/${selectedMission.image_path}`} alt="Before" className="w-full h-full object-cover rounded-xl" />
+                     <img src={`${import.meta.env.VITE_API_URL}/${selectedMission.image_path}`} alt="Before" className="w-full h-full object-cover rounded-xl" />
                   ) : (
                     <div className="photo-placeholder"><Camera size={24} /> No Image</div>
                   )}
@@ -194,7 +194,7 @@ export default function ContractorPortal() {
                 <div className="photo-box active border-2 border-dashed border-emerald-400">
                   <span className="photo-tag">AFTER</span>
                   {selectedMission.status === 'resolved' ? (
-                     <img src={`http://${import.meta.env.VITE_API_URL}/${selectedMission.resolution_image_path}`} alt="After" className="w-full h-full object-cover rounded-xl" />
+                     <img src={`${import.meta.env.VITE_API_URL}/${selectedMission.resolution_image_path}`} alt="After" className="w-full h-full object-cover rounded-xl" />
                   ) : (
                     <div className="photo-placeholder"><UploadCloud size={24} /> Ready for upload</div>
                   )}
