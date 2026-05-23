@@ -21,7 +21,7 @@ auth_context = {}
 def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
 
-def send_email(target, subject, body):
+def send_email_task(target, subject, body):
     """
     Sovereign Mail Engine: Secure SMTP Pipeline.
     Refactored to SMTP_SSL (Port 465) for industrial-grade stability.

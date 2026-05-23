@@ -26,7 +26,7 @@ from priortize import prioritize_complaint  # Categorization & Logic
 from Clustering import get_clusters  # Clustering Logic
 from verification import (
     auth_context, OTPRequest, VerifyRequest, CitizenFinal, 
-    init_verification_db, send_email, hash_password
+    init_verification_db, send_email_task, hash_password
 )
 from desk_routes import router as desk_router
 import status_update
@@ -145,36 +145,36 @@ def get_db_connection(db_name):
     return conn
 
 # --- EMAIL HELPER ---
-def send_email(target, subject, body):
-    """
-    Sovereign Mail Engine: Secure SMTP Pipeline.
-    Refactored to SMTP_SSL (Port 465) for industrial-grade stability.
-    """
-    from email.mime.multipart import MIMEMultipart
+# def send_email_task(target, subject, body):
+#     """
+#     Sovereign Mail Engine: Secure SMTP Pipeline.
+#     Refactored to SMTP_SSL (Port 465) for industrial-grade stability.
+#     """
+#     from email.mime.multipart import MIMEMultipart
     
-    msg = MIMEMultipart()
-    msg['Subject'] = subject
-    msg['From'] = SMTP_EMAIL
-    msg['To'] = target
-    msg.attach(MIMEText(body, 'plain'))
+#     msg = MIMEMultipart()
+#     msg['Subject'] = subject
+#     msg['From'] = SMTP_EMAIL
+#     msg['To'] = target
+#     msg.attach(MIMEText(body, 'plain'))
     
-    try:
-        # SYSTEMS ARCHITECT: Switching to Port 465 (Implicit SSL) to bypass STARTTLS read timeouts
-        server = smtplib.SMTP('smtp.gmail.com', 587, timeout=15)
-        # server.set_debuglevel(1) # Enable only for low-level protocol debugging
-        server.starttls()
-        server.login(SMTP_EMAIL, SMTP_PASSWORD)
-        server.sendmail(SMTP_EMAIL, [target], msg.as_string())
-        server.quit()
-        print(f"✅ Email sent to {target}", flush=True)
-        return True
-    except smtplib.SMTPAuthenticationError:
-        print("CRITICAL: SMTP Authentication Failed. Check App Password.")
-        return False
-    except Exception as e:
-        print(f"Nivaran Mail Engine Error: {e}")
-        # FAIL-OVER: Log the error and allow the pipeline to continue (Non-Blocking)
-        return False
+#     try:
+#         # SYSTEMS ARCHITECT: Switching to Port 465 (Implicit SSL) to bypass STARTTLS read timeouts
+#         server = smtplib.SMTP('smtp.gmail.com', 587, timeout=15)
+#         # server.set_debuglevel(1) # Enable only for low-level protocol debugging
+#         server.starttls()
+#         server.login(SMTP_EMAIL, SMTP_PASSWORD)
+#         server.sendmail(SMTP_EMAIL, [target], msg.as_string())
+#         server.quit()
+#         print(f"✅ Email sent to {target}", flush=True)
+#         return True
+#     except smtplib.SMTPAuthenticationError:
+#         print("CRITICAL: SMTP Authentication Failed. Check App Password.")
+#         return False
+#     except Exception as e:
+#         print(f"Nivaran Mail Engine Error: {e}")
+#         # FAIL-OVER: Log the error and allow the pipeline to continue (Non-Blocking)
+#         return False
 
 def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
