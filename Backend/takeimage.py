@@ -107,6 +107,12 @@ aesgcm = AESGCM(key_bytes)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
+# ... inside security configuration section ...
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "uploads")
+
+# --- ADD THIS LINE TO CREATE THE FOLDER AUTOMATICALLY ---
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 # In-memory OTP store
