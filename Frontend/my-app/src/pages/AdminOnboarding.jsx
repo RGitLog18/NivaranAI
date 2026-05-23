@@ -210,8 +210,7 @@ export default function AdminOnboarding() {
           is_setup_complete: 1,
           is_onboarded: true,
           specific_role: form.specificRole,
-          is_setup_complete: 1,
-          is_onboarded: true,
+          is_setup_complete: 1
         }, token);
 
         navigate('/dashboard');
