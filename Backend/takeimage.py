@@ -344,21 +344,25 @@ init_db()
 
 @app.post("/api/citizen/send-otp")
 async def citizen_send_otp(data: OTPRequest):
+    print(f">>> RECEIVED REQUEST FOR EMAIL: {data.email}", flush=True)
+
     email = data.email.strip().lower()
     is_signup = data.is_signup
+    
+    print(f">>> CHECKING DATABASE...", flush=True)
 
     # --- LOGGING TRIGGER ---
     print("\n" + "!"*60, flush=True)
     print(f"DEBUG: CITIZEN REQUEST RECEIVED FOR: {email}", flush=True)
     
     # Database: citizen.db | Table: citizens
-    with sqlite3.connect('./citizen.db') as conn:
-        cursor = conn.cursor()
-        # For citizens, we check if the email exists
-        user = cursor.execute(
-            "SELECT email FROM citizens WHERE email = ?", 
-            (email,)
-        ).fetchone()
+   try:
+        with sqlite3.connect(CITIZEN_DB) as conn:
+            cursor = conn.cursor()
+            user = cursor.execute("SELECT email FROM citizens WHERE email = ?", (email,)).fetchone()
+    except Exception as e:
+        print(f">>> DATABASE ERROR: {e}", flush=True)
+        raise HTTPException(status_code=500, detail="Database error")
 
     # LOGIN CHECK: Citizen must have an account
     if not is_signup and not user:
@@ -379,8 +383,9 @@ async def citizen_send_otp(data: OTPRequest):
         "is_signup": is_signup
     }
 
-    print(f"👤 CITIZEN OTP for {email}: {otp_code}")
-    send_email(email, "Citizen Portal Verification", f"Your Nivaran verification code is: {otp_code}")
+    print(f"👤 CITIZEN OTP for {email}: {otp_code}", flush=True)
+    print(">>> SKIPPING EMAIL FOR DEBUGGING...", flush=True)
+    # send_email(email, "Citizen Portal Verification", f"Your Nivaran verification code is: {otp_code}")
     
     return {"status": "success", "message": "OTP sent successfully."}
 
