@@ -357,9 +357,9 @@ async def citizen_send_otp(data: OTPRequest):
     
     # Database: citizen.db | Table: citizens
    try:
-        with sqlite3.connect(CITIZEN_DB) as conn:
-            cursor = conn.cursor()
-            user = cursor.execute("SELECT email FROM citizens WHERE email = ?", (email,)).fetchone()
+    with sqlite3.connect(CITIZEN_DB) as conn:
+        cursor = conn.cursor()
+        user = cursor.execute("SELECT email FROM citizens WHERE email = ?", (email,)).fetchone()
     except Exception as e:
         print(f">>> DATABASE ERROR: {e}", flush=True)
         raise HTTPException(status_code=500, detail="Database error")
