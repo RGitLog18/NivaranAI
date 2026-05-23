@@ -5,13 +5,27 @@ import sqlite3
 import random
 import smtplib
 import hashlib
+import time
+from fastapi import BackgroundTasks
+import os
+import random
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import jwt
-from fastapi import BackgroundTasks
 import os
 from dotenv import load_dotenv
+from verification import (
+    auth_context, OTPRequest, VerifyRequest, CitizenFinal, 
+    init_verification_db, send_email_task, hash_password
+)
+from detective import run_ai_detection  # AI Verification (Roboflow)
+from priortize import prioritize_complaint  # Categorization & Logic
+from Clustering import get_clusters  # Clustering Logic
+from verification import (
+    auth_context, OTPRequest, VerifyRequest, CitizenFinal, 
+    init_verification_db, send_email_task, hash_password
+)
 
 load_dotenv()
 
