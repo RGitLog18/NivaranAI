@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv("JWT_SECRET", "super-secret-government-key")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 1440
 SMTP_EMAIL = "rajeedandge444@gmail.com" 
-SMTP_PASSWORD = "zkpm slsj txnh bclm"
+SMTP_PASSWORD = "upss smqy fttm nogd"
 
 # In-memory store for OTPs and Sessions
 auth_context = {}

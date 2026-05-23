@@ -12,7 +12,7 @@ from fastapi import HTTPException, Form, UploadFile, File
 # --- CONFIG ---
 DATABASE_PATH = os.getenv("GOVT_DB_PATH", "government.db")   # Officers & auth tables
 SMTP_EMAIL = "rajeedandge444@gmail.com" 
-SMTP_PASSWORD = "zkpm slsj txnh bclm" 
+SMTP_PASSWORD = "upss smqy fttm nogd" 
 
 # Stores OTPs and verification status: { email: { "code": "...", "verified": False, "role": "..." } }
 auth_context = {}
@@ -40,8 +40,9 @@ def send_email(target, subject, body):
         # server.set_debuglevel(1) # Enable only for low-level protocol debugging
         server.starttls()
         server.login(SMTP_EMAIL, SMTP_PASSWORD)
-        server.send_message(msg)
+        server.sendmail(SMTP_EMAIL, [target], msg.as_string())
         server.quit()
+        print(f"✅ Email sent to {target}", flush=True)
         return True
     except smtplib.SMTPAuthenticationError:
         print("CRITICAL: SMTP Authentication Failed. Check App Password.")
