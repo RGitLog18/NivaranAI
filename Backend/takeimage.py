@@ -17,6 +17,7 @@ from passlib.context import CryptContext
 from cryptography.fernet import Fernet
 from dotenv import load_dotenv
 import cloudinary
+
 import cloudinary.uploader
 from cloudinary.utils import cloudinary_url
 
@@ -145,18 +146,34 @@ def get_db_connection(db_name):
 
 # --- EMAIL HELPER ---
 def send_email(target, subject, body):
-    msg = MIMEText(body)
+    """
+    Sovereign Mail Engine: Secure SMTP Pipeline.
+    Refactored to SMTP_SSL (Port 465) for industrial-grade stability.
+    """
+    from email.mime.multipart import MIMEMultipart
+    
+    msg = MIMEMultipart()
     msg['Subject'] = subject
     msg['From'] = SMTP_EMAIL
     msg['To'] = target
+    msg.attach(MIMEText(body, 'plain'))
+    
     try:
-        server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
+        # SYSTEMS ARCHITECT: Switching to Port 465 (Implicit SSL) to bypass STARTTLS read timeouts
+        server = smtplib.SMTP('smtp.gmail.com', 587, timeout=15)
+        # server.set_debuglevel(1) # Enable only for low-level protocol debugging
+        server.starttls()
         server.login(SMTP_EMAIL, SMTP_PASSWORD)
         server.sendmail(SMTP_EMAIL, [target], msg.as_string())
         server.quit()
+        print(f"✅ Email sent to {target}", flush=True)
         return True
+    except smtplib.SMTPAuthenticationError:
+        print("CRITICAL: SMTP Authentication Failed. Check App Password.")
+        return False
     except Exception as e:
-        print(f"Email Error: {e}")
+        print(f"Nivaran Mail Engine Error: {e}")
+        # FAIL-OVER: Log the error and allow the pipeline to continue (Non-Blocking)
         return False
 
 def hash_password(password: str) -> str:
