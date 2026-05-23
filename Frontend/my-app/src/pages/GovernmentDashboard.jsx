@@ -23,7 +23,7 @@ export default function GovernmentDashboard() {
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
 
-      const complaintsRes = await axios.get(`http://127.0.0.1:8000/get-complaints?ward=${officerWard}&category=${category}`, config);
+      const complaintsRes = await axios.get(`${import.meta.env.VITE_API_URL}/get-complaints?ward=${officerWard}&category=${category}`, config);
 
       setComplaints(complaintsRes.data || []);
       setLoading(false);
@@ -108,7 +108,7 @@ export default function GovernmentDashboard() {
                   <td>{item.full_name}</td>
                   <td>{item.ai_score.toFixed(1)}</td>
                   <td>{item.location}</td>
-                  <td><button className="btn-view" onClick={() => window.open(`http://127.0.0.1:8000/${item.image_path}`)}>View</button></td>
+                  <td><button className="btn-view" onClick={() => window.open(`${import.meta.env.VITE_API_URL}/${item.image_path}`)}>View</button></td>
                 </tr>
               ))}
             </tbody>

@@ -47,7 +47,7 @@ export function AuthProvider({ children }) {
       }
 
       try {
-        const res = await axios.get("http://127.0.0.1:8000/api/v1/user/profile", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/profile`, {
           headers: { Authorization: `Bearer ${token.trim()}` }
         });
 
@@ -80,7 +80,7 @@ export function AuthProvider({ children }) {
     }
 
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/v1/user/profile", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/user/profile`, {
         headers: { Authorization: `Bearer ${token.trim()}` }
       });
 

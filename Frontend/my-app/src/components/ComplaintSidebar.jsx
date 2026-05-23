@@ -139,7 +139,7 @@ export function ComplaintSidebar() {
             <CardHeader><CardTitle className="text-sm">Evidence</CardTitle></CardHeader>
             <CardContent>
               <img
-                src={`${import.meta.env.VITE_API_URL}:8000/${selectedComplaint.image_path}`}
+                src={`${import.meta.env.VITE_API_URL}/${selectedComplaint.image_path}`}
                 alt="Complaint"
                 className="w-full h-48 object-cover rounded-lg"
                 onError={(e) => e.target.src = 'https://via.placeholder.com/400x200?text=No+Image+Available'}

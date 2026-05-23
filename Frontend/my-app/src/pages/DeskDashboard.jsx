@@ -49,10 +49,10 @@ export default function DeskDashboard() {
             const config = { headers: { Authorization: `Bearer ${token}` }, params };
 
             const [statsRes, inboxRes, chartRes] = await Promise.all([
-                axios.get("http://127.0.0.1:8000/api/v1/desk/dashboard-stats", config),
-                axios.get("http://127.0.0.1:8000/api/v1/desk/inbox", config),
+                axios.get(`${import.meta.env.VITE_API_URL}/api/v1/desk/dashboard-stats`, config),
+                axios.get(`${import.meta.env.VITE_API_URL}/api/v1/desk/inbox`, config),
                 // NEW: Fetching real trend data
-                axios.get("http://127.0.0.1:8000/api/v1/desk/severity-trend", config)
+                axios.get(`${import.meta.env.VITE_API_URL}/api/v1/desk/severity-trend`, config)
             ]);
 
             setMetrics(statsRes.data);

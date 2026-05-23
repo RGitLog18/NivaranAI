@@ -15,7 +15,7 @@ export default function Heatmap() {
         const config = { headers: { Authorization: `Bearer ${token}` } };
         // Default Logic: On mount, automatically fetch data for category "Roads & Infrastructure".
         // The API explicitly handles "Roads" via fuzzy match in the Backend Guard.
-        const res = await axios.get(`http://127.0.0.1:8000/get-heatmap?ward=${officerWard}&category=Roads & Infrastructure`, config);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/get-heatmap?ward=${officerWard}&category=Roads & Infrastructure`, config);
         setClusters(res.data?.clusters || []);
       } catch (err) {
         console.error("Failed to load Reflector Data:", err);

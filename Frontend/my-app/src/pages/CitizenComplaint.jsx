@@ -160,7 +160,7 @@ export default function CitizenComplaint() {
     }
     setLoading(true);
     try {
-      await axios.post("http://127.0.0.1:8000/api/send-otp", {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/send-otp`, {
         email: form.email,
         name: form.citizenName,
         role: "citizen",
@@ -178,7 +178,7 @@ export default function CitizenComplaint() {
   const handleVerifyOTP = async () => {
     setVerifyingOtp(true);
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/verify-otp", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/verify-otp`, {
         email: form.email,
         code: form.otp
       });
@@ -244,7 +244,7 @@ export default function CitizenComplaint() {
     try {
       setTimeout(() => setPipelineStep(2), 1500);
       setTimeout(() => setPipelineStep(3), 3000);
-      const res = await axios.post("http://127.0.0.1:8000/api/citizen/submit-complaint", formData);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/citizen/submit-complaint`, formData);
       if (res.data.status === "success") {
         setPipelineStep(4);
         setTimeout(() => setSubmitted(true), 1000);

@@ -68,7 +68,7 @@ export default function GovernmentLanding() {
     const fetchConfig = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get("http://127.0.0.1:8000/api/v1/system/config", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/system/config`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setSystemConfig(res.data);
@@ -134,11 +134,11 @@ export default function GovernmentLanding() {
                         <h4 style={{fontFamily: 'Playfair Display', fontSize: '1.3rem', marginBottom: '1rem'}}>Market Area: Sanitation Success</h4>
                         <div className="audit-grid" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem'}}>
                             <div className="audit-card" style={{border: '2px solid #F0F9FF', padding: '1rem'}}>
-                                <img src="http://127.0.0.1:8000/uploads/resolutions/test_before.jpg" alt="Before" className="audit-img" style={{width: '100%', height: '250px', objectFit: 'cover'}} />
+                                <img src={`${import.meta.env.VITE_API_URL}/uploads/resolutions/test_before.jpg`} alt="Before" className="audit-img" style={{width: '100%', height: '250px', objectFit: 'cover'}} />
                                 <div className="audit-label" style={{marginTop: '1rem', fontWeight: 900, color: '#64748b'}}>BEFORE: COMMUNITY NEGLECT</div>
                             </div>
                             <div className="audit-card" style={{border: '4px solid #10b981', padding: '1rem'}}>
-                                <img src="http://127.0.0.1:8000/uploads/resolutions/test_fixed.jpg" alt="After" className="audit-img" style={{width: '100%', height: '250px', objectFit: 'cover'}} />
+                                <img src={`${import.meta.env.VITE_API_URL}/uploads/resolutions/test_fixed.jpg`} alt="After" className="audit-img" style={{width: '100%', height: '250px', objectFit: 'cover'}} />
                                 <div className="audit-label" style={{marginTop: '1rem', fontWeight: 900, color: '#10b981'}}>AFTER: GOVERNANCE TRUTH</div>
                             </div>
                         </div>

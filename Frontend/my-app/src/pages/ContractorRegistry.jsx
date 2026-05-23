@@ -30,7 +30,7 @@ export default function ContractorRegistry() {
         // fd.append('contractor_email', contractor.email); // Ensure 'email' exists on the contractor object
 
         try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}:8000/api/allocate-contractor`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/allocate-contractor`, {
             method: 'POST', // CRITICAL: Tell the server this is a POST request
             headers: { 
                 'Content-Type': 'application/json' 
@@ -78,7 +78,7 @@ export default function ContractorRegistry() {
             const token = localStorage.getItem('token');
 
             // 2. Fetch the "Visual Proof" history from your new backend route
-            const res = await axios.get(`http://${import.meta.env.VITE_API_URL}:8000/api/v1/desk/contractor-portfolio/${contractorName}`);
+            const res = await axios.get(`http://${import.meta.env.VITE_API_URL}/api/v1/desk/contractor-portfolio/${contractorName}`);
             setPortfolioData(res.data);    
         }catch (err) {
             console.error("Audit Failure:", err);
@@ -93,7 +93,7 @@ export default function ContractorRegistry() {
         // Fetch your contractors list
         const fetchContractors = async () => {
             try {
-                const res = await axios.get(`http://${import.meta.env.VITE_API_URL}:8000/api/v1/desk/contractors`); // adjust URL as per your routes
+                const res = await axios.get(`http://${import.meta.env.VITE_API_URL}/api/v1/desk/contractors`); // adjust URL as per your routes
                 setContractors(res.data);
             } catch (err) {
                 console.error("Error fetching contractors", err);
@@ -107,7 +107,7 @@ export default function ContractorRegistry() {
         // setLoading(true);
         try {
              const token = localStorage.getItem('token');
-            const res = await axios.get(`http://${import.meta.env.VITE_API_URL}:8000/api/v1/desk/contractors`, {
+            const res = await axios.get(`http://${import.meta.env.VITE_API_URL}/api/v1/desk/contractors`, {
                 params: { ward: user.ward, domain: user.admin_domain },
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -247,8 +247,8 @@ export default function ContractorRegistry() {
                                             <div key={job.id} className="border-b border-slate-50 pb-6">
                                                 <small className="font-bold text-slate-400 uppercase">{job.location}</small>
                                                 <div className="grid grid-cols-2 gap-2 mt-2">
-                                                    <img src={`http://127.0.0.1:8000/${job.image_path}`} className="rounded-lg h-24 object-cover grayscale" title="Before" />
-                                                    <img src={`http://127.0.0.1:8000/${job.resolution_image_path}`} className="rounded-lg h-24 object-cover border-2 border-emerald-500" title="After" />
+                                                    <img src={`http://${import.meta.env.VITE_API_URL}/${job.image_path}`} className="rounded-lg h-24 object-cover grayscale" title="Before" />
+                                                    <img src={`http://${import.meta.env.VITE_API_URL}/${job.resolution_image_path}`} className="rounded-lg h-24 object-cover border-2 border-emerald-500" title="After" />
                                                 </div>
                                             </div>
                                         ))}

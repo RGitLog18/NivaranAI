@@ -23,7 +23,7 @@ export default function StatisticsPage() {
       const token = localStorage.getItem('token');
       const ward = user?.ward || "Dombivli East";
 
-      const res = await axios.get(`http://127.0.0.1:8000/api/v1/admin/executive-summary`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/admin/executive-summary`, {
         params: { ward, period },
         headers: { Authorization: `Bearer ${token}` }
       });

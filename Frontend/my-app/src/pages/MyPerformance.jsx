@@ -11,7 +11,7 @@ export default function MyPerformance() {
 
     const fetchPerformance = async () => {
         const token = localStorage.getItem('token');
-        const res = await axios.get(`http://127.0.0.1:8000/api/v1/desk/my-performance-stats`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/desk/my-performance-stats`, {
             params: { ward: user.ward, domain: user.admin_domain },
             headers: { Authorization: `Bearer ${token}` }
         });

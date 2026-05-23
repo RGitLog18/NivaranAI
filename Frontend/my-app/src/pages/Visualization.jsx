@@ -52,7 +52,7 @@ export default function Visualization() {
         // if (!user) return;
         // We filter by the logged-in admin's ward/zone (e.g., "Dombivli East")
         const zone = user?.location || user?.ward || "";
-        const response = await fetch(`http://127.0.0.1:8000/api/get-complaints?zone=${encodeURIComponent(zone)}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/get-complaints?zone=${encodeURIComponent(zone)}`);
         if (response.ok) {
 
           const data = await response.json();

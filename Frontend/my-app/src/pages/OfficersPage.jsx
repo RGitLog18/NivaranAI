@@ -35,7 +35,7 @@ export default function OfficersPage() {
       setLoading(true);
       const token = localStorage.getItem('token');
       // Fetching officers belonging to the same ward/location as the Admin
-      const res = await axios.get(`http://127.0.0.1:8000/api/v1/desk/officers`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/desk/officers`, {
         params: { ward: user?.ward },
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -84,7 +84,7 @@ export default function OfficersPage() {
       const token = localStorage.getItem('token');
 
       // FIXED URL: Added 'desk' to the path to match the backend router prefix
-      const url = `http://127.0.0.1:8000/api/v1/desk/issue-job-card/${selectedReport.complaint.id}`;
+      const url = `${import.meta.env.VITE_API_URL}/api/v1/desk/issue-job-card/${selectedReport.complaint.id}`;
 
       const res = await axios.post(url,
         { officer_email: selectedOfficer.email }, // Sent as JSON
