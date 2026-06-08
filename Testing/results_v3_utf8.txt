@@ -1,0 +1,31 @@
+﻿C:\Users\Sakshi\AppData\Local
+\Programs\Python\Python310\py
+thon.exe : Traceback (most 
+recent call last):
+At line:1 char:32
++ ... NG="utf-8"; C:\Users\Sa
+kshi\AppData\Local\Programs\P
+ython\Python310\p ...
++                 ~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (Traceba  
+  ck (most recent call las   
+ t)::String) [], RemoteEx    
+ception
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+  File "D:\ML Projects\Nivara
+nAI\Testing\evaluate.py", 
+line 11, in <module>
+    from priortize import 
+prioritize_complaint
+  File "D:\ML Projects\Nivara
+nAI\Backend\priortize.py", 
+line 1, in <module>
+    from transformers import 
+pipeline
+ModuleNotFoundError: No 
+module named 'transformers'
